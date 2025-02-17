@@ -115,7 +115,7 @@ stages:
 
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
-  dependsOn: Test
+  dependsOn: Build
   jobs:
   - deployment: Deploy
     pool:
@@ -139,7 +139,7 @@ stages:
               appName: '$(WebAppNameStaging)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
               appType: webAppLinux
-              
+
           - task: AzureAppServiceManage@0
             displayName: 'Swap deployment slots'
             inputs:
